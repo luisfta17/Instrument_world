@@ -1,3 +1,5 @@
+const PubSub = require('../helpers/pub_sub.js');
+
 const InstrumentFamilies = function() {
   this.instrumentFamilies = [
     {
@@ -27,5 +29,18 @@ const InstrumentFamilies = function() {
     }
   ];
 };
+
+InstrumentFamilies.prototype.bindEvents = function(){
+  PubSub.publish('Instruments:all-instruments-ready', this.instrumentFamilies);
+  // PubSub.subscribe('SelectView:change', (evt) => {
+  //   const selectedIndex = evt.detail;
+  //   this.publishAnimalDetail(selectedIndex);
+  // });
+};
+
+// InstrumentFamilies.prototype.publishAnimalDetail = function(animalIndex){
+//   const selectedAnimal = this.animals[animalIndex];
+//   PubSub.publish('Animals:selected-animal-ready', selectedAnimal)
+// };
 
 module.exports = InstrumentFamilies;
