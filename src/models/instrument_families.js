@@ -32,15 +32,15 @@ const InstrumentFamilies = function() {
 
 InstrumentFamilies.prototype.bindEvents = function(){
   PubSub.publish('Instruments:all-instruments-ready', this.instrumentFamilies);
-  // PubSub.subscribe('SelectView:change', (evt) => {
-  //   const selectedIndex = evt.detail;
-  //   this.publishAnimalDetail(selectedIndex);
-  // });
+  PubSub.subscribe('SelectView:change', (evt) => {
+    const selectedIndex = evt.detail;
+    this.publishAnimalDetail(selectedIndex);
+  });
 };
 
-// InstrumentFamilies.prototype.publishAnimalDetail = function(animalIndex){
-//   const selectedAnimal = this.animals[animalIndex];
-//   PubSub.publish('Animals:selected-animal-ready', selectedAnimal)
-// };
+InstrumentFamilies.prototype.publishAnimalDetail = function(instrumentIndex){
+  const selectedInstrument = this.instrumentFamilies[instrumentIndex];
+  PubSub.publish('Instruments:selected-instrument-ready', selectedInstrument);
+};
 
 module.exports = InstrumentFamilies;
